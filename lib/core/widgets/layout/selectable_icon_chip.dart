@@ -18,40 +18,42 @@ class SelectableIconChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color borderColor = isSelected
-        ? AppColors.accent
-        : AppColors.primary.withOpacity(0.12);
-    final Color backgroundColor = isSelected
-        ? AppColors.accent.withOpacity(0.12)
-        : AppColors.surfaceVariant;
-    final Color iconColor = isSelected
-        ? AppColors.accent
-        : AppColors.textSecondary;
-
-    return InkWell(
-      borderRadius: BorderRadius.circular(24),
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(AppRadius.sm),
-          border: Border.all(color: borderColor),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 22, color: iconColor),
-            const SizedBox(width: 6),
-            Text(
-              label,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                fontSize: 16,
-              ),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeOut,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(AppRadius.sm),
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? AppColors.accent.withOpacity(0.12)
+                : AppColors.surfaceVariant,
+            borderRadius: BorderRadius.circular(AppRadius.sm),
+            border: Border.all(
+              color: isSelected
+                  ? AppColors.accent
+                  : AppColors.primary.withOpacity(0.12),
             ),
-          ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
+                size: 20,
+                color: isSelected ? AppColors.accent : AppColors.textSecondary,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                label,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
