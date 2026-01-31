@@ -6,6 +6,19 @@ enum Currency { cop, usd }
 
 enum PeriodType { month, week, day, night, hour }
 
+enum PropertyType {
+  apartment,
+  house,
+  villa,
+  farm,
+  commercial,
+  office,
+  warehouse,
+  hotel,
+  land,
+  building,
+}
+
 class AddPropertyProvider extends ChangeNotifier {
   /// STEP CONTROL
   int _currentStep = 0;
@@ -52,13 +65,13 @@ class AddPropertyProvider extends ChangeNotifier {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
 
-  //  final TextEditingController currencyController = TextEditingController();
-  bool get hasCurrencyError => submitted && currency == null;
-
-  bool get hasPeriodError =>
-      submitted && offerType == OfferType.rent && period == null;
-
   bool get hasPriceError => submitted && priceController.text.isEmpty;
+
+  bool get hasPropertyNameError =>
+      submitted && propertyNameController.text.isEmpty;
+
+  bool get hasDescriptionError =>
+      submitted && descriptionController.text.isEmpty;
 
   void setOfferType(OfferType type) {
     offerType = type;
@@ -76,13 +89,15 @@ class AddPropertyProvider extends ChangeNotifier {
   }
 
   /// STEP 2 – PROPERTY TYPE
-  String? _propertyType;
-  String? get propertyType => _propertyType;
+  PropertyType? _propertyType;
+  PropertyType? get propertyType => _propertyType;
 
-  void setPropertyType(String type) {
+  void setPropertyType(PropertyType type) {
     _propertyType = type;
     notifyListeners();
   }
+
+  bool get hasPropertyTypeError => submitted && _propertyType == null;
 
   /// STEP 3 – DETAILS
   int? bedrooms;
@@ -137,7 +152,8 @@ class AddPropertyProvider extends ChangeNotifier {
     switch (step) {
       case 0:
         return propertyNameController.text.isNotEmpty &&
-            priceController.text.isNotEmpty;
+            priceController.text.isNotEmpty &&
+            descriptionController.text.isNotEmpty;
       case 1:
         return _propertyType != null;
       case 2:

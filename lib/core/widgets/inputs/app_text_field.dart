@@ -9,6 +9,8 @@ class AppTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final int maxLines;
+  final bool hasError;
+  final String? errorText;
   final List<TextInputFormatter>? inputFormatters;
 
   const AppTextField({
@@ -18,16 +20,15 @@ class AppTextField extends StatelessWidget {
     this.hint,
     this.keyboardType = TextInputType.text,
     this.maxLines = 1,
+    this.hasError = false,
+    this.errorText,
     this.inputFormatters,
   });
 
   OutlineInputBorder _border(Color color) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide(
-        color: color,
-        width: 1.2,
-      ),
+      borderSide: BorderSide(color: color, width: 1.2),
     );
   }
 
@@ -52,16 +53,18 @@ class AppTextField extends StatelessWidget {
               horizontal: 14,
               vertical: 14,
             ),
-            hintStyle: Theme.of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(color: AppColors.textSecondary),
+            hintStyle: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
 
             // 🔑 BORDES CORRECTOS
             enabledBorder: _border(AppColors.border),
             focusedBorder: _border(AppColors.accent),
             errorBorder: _border(Colors.red),
             focusedErrorBorder: _border(Colors.redAccent),
+
+            errorText: hasError ? errorText : null,
+            // errorMaxLines: 2,
           ),
         ),
       ],

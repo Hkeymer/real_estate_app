@@ -54,6 +54,7 @@ class AppDropdown<T> extends StatelessWidget {
             focusedErrorBorder: _border(Colors.redAccent),
 
             errorText: hasError ? errorText : null,
+            
           ),
         ),
       ],

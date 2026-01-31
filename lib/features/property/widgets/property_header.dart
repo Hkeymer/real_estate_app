@@ -11,7 +11,7 @@ class PropertyHeader extends StatelessWidget {
       pinned: true,
       backgroundColor: Colors.white,
       leading: _HeaderIcon(
-        icon: Icons.arrow_back,
+        icon: Icons.chevron_left,
         onTap: () => Navigator.pop(context),
       ),
       actions: [

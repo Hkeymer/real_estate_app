@@ -7,6 +7,8 @@ class AppNumberField extends StatelessWidget {
   final String? hint;
   final bool isDecimal;
   final TextEditingController controller;
+  final bool hasError;
+  final String? errorText;
 
   const AppNumberField({
     super.key,
@@ -14,6 +16,8 @@ class AppNumberField extends StatelessWidget {
     required this.controller,
     this.isDecimal = false,
     this.hint,
+    this.hasError = false,
+    this.errorText,
   });
 
   @override
@@ -22,6 +26,8 @@ class AppNumberField extends StatelessWidget {
       label: label,
       hint: hint,
       controller: controller,
+      hasError: hasError,
+      errorText: errorText,
       keyboardType: isDecimal
           ? TextInputType.numberWithOptions(decimal: true)
           : TextInputType.number,

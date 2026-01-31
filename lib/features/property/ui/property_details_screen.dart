@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/core/theme/app_colors.dart';
 
 import 'package:real_estate_app/core/theme/app_spacing.dart';
-import 'package:real_estate_app/core/theme/app_radius.dart';
 import 'package:real_estate_app/core/widgets/buttons/primary_button.dart';
 
 import 'package:real_estate_app/features/property/widgets/contact_section.dart';

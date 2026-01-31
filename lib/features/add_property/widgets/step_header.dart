@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:real_estate_app/core/theme/app_text_styles.dart';
 import 'package:real_estate_app/features/add_property/provider/add_property_provider.dart';
 
 import 'package:real_estate_app/core/theme/app_colors.dart';
@@ -27,33 +28,37 @@ class StepHeader extends StatelessWidget {
           children: [
             /// TOP ROW
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
                   borderRadius: BorderRadius.circular(AppRadius.sm),
                   onTap: onBack ?? provider.previousStep,
                   child: const Padding(
                     padding: EdgeInsets.all(6),
-                    child: Icon(Icons.arrow_back, size: 22),
+                    child: Icon(Icons.chevron_left, size: 24),
                   ),
                 ),
-                const Spacer(),
-                Text(
-                  '$current / $total',
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: AppColors.textSecondary,
+
+                /// TITLE
+                Text('Add Property', style: AppTextStyles.title),
+
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(AppRadius.md),
+                  ),
+                  child: Text(
+                    '0$current / 0$total',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.labelMedium?.copyWith(color: AppColors.surface),
                   ),
                 ),
               ],
-            ),
-
-            const SizedBox(height: 16),
-
-            /// TITLE
-            Text(
-              'Add Property',
-              style: Theme.of(
-                context,
-              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
             ),
 
             const SizedBox(height: 12),
@@ -63,9 +68,9 @@ class StepHeader extends StatelessWidget {
               borderRadius: BorderRadius.circular(AppRadius.sm),
               child: LinearProgressIndicator(
                 value: progress,
-                minHeight: 6,
+                minHeight: 8,
                 backgroundColor: AppColors.surfaceVariant,
-                valueColor: AlwaysStoppedAnimation<Color>(AppColors.accent),
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
               ),
             ),
           ],

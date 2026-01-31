@@ -21,7 +21,7 @@ class PropertyHighlights extends StatelessWidget {
             _HighlightItem(icon: Icons.bed_outlined, label: '3 Beds'),
             _HighlightItem(icon: Icons.bathtub_outlined, label: '2 Baths'),
             _HighlightItem(icon: Icons.square_foot_outlined, label: '120 m²'),
-            _HighlightItem(icon: Icons.home_outlined, label: 'Apartment'),
+            // _HighlightItem(icon: Icons.home_outlined, label: 'Apartment'),
           ],
         ),
       ),
