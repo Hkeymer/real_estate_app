@@ -1,4 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:real_estate_app/core/enums/amenity.dart';
+import 'package:real_estate_app/core/enums/offer_type.dart';
+import 'package:real_estate_app/core/enums/property_type.dart';
+import 'package:real_estate_app/core/enums/status.dart';
 import 'package:real_estate_app/shared/models/property/location_model.dart';
 import 'package:real_estate_app/shared/models/property/pricing_model.dart';
 import 'package:real_estate_app/shared/models/property/property_details_model.dart';
@@ -10,9 +14,9 @@ class PropertyModel {
 
   final String title;
   final String description;
-  final String offerType; // rent | sale
-  final String propertyType; // apartment | house | land | commercial
-  final String status;
+  final OfferType offerType;
+  final PropertyType propertyType;
+  final Status status;
 
   final PropertyPricing pricing;
   final PropertyLocation location;
@@ -30,7 +34,7 @@ class PropertyModel {
 
   // Details
   final PropertyDetails details;
-  final List<String> amenities;
+  final Amenity amenities;
 
   // Ownership
   final String agentId;
@@ -108,7 +112,7 @@ class PropertyModel {
       videoUrl: json['videoUrl'],
       virtualTourUrl: json['virtualTourUrl'],
       details: PropertyDetails.fromJson(json['details']),
-      amenities: List<String>.from(json['amenities'] ?? []),
+      amenities: json['amenities'],
       agentId: json['agentId'],
       ownerId: json['ownerId'],
       createdBy: json['createdBy'],

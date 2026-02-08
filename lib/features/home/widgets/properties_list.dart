@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate_app/core/widgets/cards/property_card.dart';
 import 'package:real_estate_app/core/widgets/cards/property_card_primary.dart';
 import 'package:real_estate_app/core/widgets/layout/section_title.dart';
 
@@ -14,7 +15,6 @@ class PropertiesList extends StatefulWidget {
 
 class _PropertiesListState extends State<PropertiesList> {
   final Set<int> favoriteIndexes = {};
-
   late final List<PropertyMock> properties;
 
   @override
@@ -53,33 +53,53 @@ class _PropertiesListState extends State<PropertiesList> {
         ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          // padding: const EdgeInsets.symmetric(horizontal: 16),
           itemCount: properties.length,
           separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
           itemBuilder: (_, index) {
             final property = properties[index];
+
             final isFavorite = favoriteIndexes.contains(index);
 
-            return PropertyCardPrimary(
-              imageUrl: property.image,
-              location: property.location,
-              price: property.price,
-              publishedAt: property.publishedAt,
-              bedrooms: property.bedrooms,
-              bathrooms: property.bathrooms,
-              area: property.area,
-              type: property.type,
-              isFavorite: isFavorite,
-              onTap: () {
-                property.onTap();
+            return TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0, end: 1),
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeOut,
+              builder: (context, value, child) {
+                return Opacity(
+                  opacity: value,
+                  child: Transform.translate(
+                    offset: Offset(0, 20 * (1 - value)),
+                    child: child,
+                  ),
+                );
               },
-              onFavoriteTap: () {
-                setState(() {
-                  isFavorite
-                      ? favoriteIndexes.remove(index)
-                      : favoriteIndexes.add(index);
-                });
-              },
+              child: PropertyCard(
+                imageUrl: property.image,
+                title: 'Se vende Propiedad en ${property.location}',
+                price: '\$${property.price.toStringAsFixed(0)}',
+                statusLabel: 'En ${property.type}',
+                location: property.location,
+                listedAgo: property.publishedAt,
+                bedrooms: property.bedrooms,
+                bathrooms: property.bathrooms,
+                area: property.area.toDouble(),
+                isFavorite: false,
+                onFavoriteTap: () {
+                  setState(() {
+                    isFavorite
+                        ? favoriteIndexes.remove(index)
+                        : favoriteIndexes.add(index);
+                  });
+                },
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const PropertyDetailScreen(),
+                    ),
+                  );
+                },
+              ),
             );
           },
         ),

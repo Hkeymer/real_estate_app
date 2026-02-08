@@ -35,18 +35,28 @@ class StepHeader extends StatelessWidget {
                   onTap: onBack ?? provider.previousStep,
                   child: const Padding(
                     padding: EdgeInsets.all(6),
-                    child: Icon(Icons.chevron_left, size: 24),
+                    child: Icon(Icons.chevron_left, size: 28),
                   ),
                 ),
 
                 /// TITLE
-                Text('Add Property', style: AppTextStyles.title),
+                Text('Añadir propiedad', style: AppTextStyles.title),
+              ],
+            ),
+            const SizedBox(height: 12),
 
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Detalle de la propiedad', style: AppTextStyles.body),
+
+                /// PROGRESS INDICATOR
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 12,
                     vertical: 8,
                   ),
+
                   decoration: BoxDecoration(
                     color: AppColors.primary,
                     borderRadius: BorderRadius.circular(AppRadius.md),
@@ -60,7 +70,6 @@ class StepHeader extends StatelessWidget {
                 ),
               ],
             ),
-
             const SizedBox(height: 12),
 
             /// PROGRESS BAR

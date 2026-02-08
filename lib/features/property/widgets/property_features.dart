@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate_app/core/constants/amenities_catalog.dart';
 import 'package:real_estate_app/core/theme/app_spacing.dart';
 import 'package:real_estate_app/core/widgets/layout/section_title.dart';
-import 'package:real_estate_app/core/widgets/layout/selectable_icon_chip.dart';
+import 'package:real_estate_app/core/widgets/layout/icon_chip.dart';
 
 class PropertyFeatures extends StatelessWidget {
-  final List<FeatureItem> features;
-  final List<String> selected;
-  final ValueChanged<String> onToggle;
+  final List<AmenityItem> features;
 
   const PropertyFeatures({
     super.key,
     required this.features,
-    required this.selected,
-    required this.onToggle,
   });
 
   @override
@@ -28,11 +25,9 @@ class PropertyFeatures extends StatelessWidget {
             spacing: 8,
             runSpacing: 8,
             children: features.map((feature) {
-              return SelectableIconChip(
+              return IconChip(
                 icon: feature.icon,
                 label: feature.label,
-                isSelected: selected.contains(feature.label),
-                onTap: () => onToggle(feature.label),
               );
             }).toList(),
           ),
@@ -42,9 +37,3 @@ class PropertyFeatures extends StatelessWidget {
   }
 }
 
-class FeatureItem {
-  final String label;
-  final IconData icon;
-
-  FeatureItem({required this.label, required this.icon});
-}

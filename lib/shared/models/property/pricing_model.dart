@@ -1,6 +1,8 @@
+import 'package:real_estate_app/core/enums/currency.dart';
+
 class PropertyPricing {
   final double amount;
-  final String currency;
+  final Currency currency;
   final String? period;
   final bool negotiable;
 
@@ -21,9 +23,9 @@ class PropertyPricing {
   }
 
   Map<String, dynamic> toJson() => {
-        'amount': amount,
-        'currency': currency,
-        'period': period,
-        'negotiable': negotiable,
-      };
+    'amount': amount,
+    'currency': currency,
+    'period': period,
+    'negotiable': negotiable,
+  };
 }

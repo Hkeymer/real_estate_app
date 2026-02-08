@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/core/widgets/cards/property_card.dart';
+import 'package:real_estate_app/core/widgets/cards/property_card_ctg.dart';
 import 'package:real_estate_app/core/widgets/layout/section_title.dart';
 
 class FeaturedProperties extends StatelessWidget {
@@ -47,7 +47,7 @@ class FeaturedProperties extends StatelessWidget {
             separatorBuilder: (_, __) => const SizedBox(width: 16),
             itemBuilder: (context, index) {
               final property = properties[index];
-              return PropertyCard(
+              return PropertyCardCtg(
                 title: property['title'] as String,
                 location: property['location'] as String,
                 price: property['price'] as double,

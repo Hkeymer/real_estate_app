@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/core/theme/app_text_styles.dart';
 import 'package:real_estate_app/core/theme/app_spacing.dart';
-import 'package:real_estate_app/core/widgets/layout/section_title.dart';
 
 class PropertyHeaderInfo extends StatelessWidget {
   const PropertyHeaderInfo({super.key});
@@ -13,14 +12,13 @@ class PropertyHeaderInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: const [
-              SectionTitle(title: 'Modern Apartment'),
-              Spacer(),
-              Text('\$300,000', style: AppTextStyles.price),
-            ],
+          Text(
+            'Se vende casa moderna en el centro de la ciudad',
+            style: AppTextStyles.headline,
           ),
           const SizedBox(height: 8),
+          const Text('\$300,000', style: AppTextStyles.price),
+          const SizedBox(height: 12),
           Row(
             children: const [
               Icon(Icons.location_on_outlined, size: 16),

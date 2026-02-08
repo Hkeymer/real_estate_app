@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:real_estate_app/core/enums/currency.dart';
+import 'package:real_estate_app/core/enums/offer_type.dart';
+import 'package:real_estate_app/core/enums/period_type.dart';
 import 'package:real_estate_app/core/theme/app_spacing.dart';
 import 'package:real_estate_app/core/theme/app_text_styles.dart';
+import 'package:real_estate_app/core/widgets/layout/form_section.dart';
 import 'package:real_estate_app/core/widgets/inputs/app_dropdown.dart';
+import 'package:real_estate_app/core/widgets/inputs/app_text_field.dart';
 import 'package:real_estate_app/core/widgets/inputs/app_number_field.dart';
 import 'package:real_estate_app/core/widgets/inputs/app_segmented_selector.dart';
-import 'package:real_estate_app/core/widgets/inputs/app_text_field.dart';
-import 'package:real_estate_app/core/widgets/layout/form_section.dart';
 import 'package:real_estate_app/features/add_property/provider/add_property_provider.dart';
 
 class StepBasicInfo extends StatelessWidget {
@@ -32,11 +35,11 @@ class StepBasicInfo extends StatelessWidget {
 
                   const SizedBox(height: AppSpacing.md),
                   AppTextField(
-                    label: 'Nombre',
+                    label: 'Titulo',
                     controller: provider.propertyNameController,
-                    hint: 'Ingrese el nombre de la propiedad',
+                    hint: 'Ej: Casa en venta',
                     hasError: provider.hasPropertyNameError,
-                    errorText: 'El nombre es obligatorio',
+                    errorText: 'El Titulo es obligatorio',
                   ),
 
                   const SizedBox(height: AppSpacing.md),
@@ -61,32 +64,23 @@ class StepBasicInfo extends StatelessWidget {
                     errorText: 'La descripción es obligatoria',
                   ),
                   const SizedBox(height: AppSpacing.md),
+
                   if (provider.offerType == OfferType.rent) ...[
-                    const SizedBox(height: AppSpacing.md),
                     Row(
                       children: [
                         Expanded(child: _buildPrice(provider)),
                         const SizedBox(width: AppSpacing.md),
-                        Expanded(child: _buildCurrency(provider)),
+                        Expanded(child: _buildPeriod(provider)),
                       ],
                     ),
-                    const SizedBox(height: AppSpacing.md),
-                    _buildPeriod(provider),
                   ] else ...[
-                    const SizedBox(height: AppSpacing.md),
-                    Row(
-                      children: [
-                        Expanded(child: _buildPrice(provider)),
-                        const SizedBox(width: AppSpacing.md),
-                        Expanded(child: _buildCurrency(provider)),
-                      ],
-                    ),
+                    _buildPrice(provider),
                   ],
                   const SizedBox(height: AppSpacing.md),
                   AppTextField(
                     label: 'Ubicación',
                     controller: provider.addressController,
-                    hint: 'Ingrese la ubicación de la propiedad',
+                    hint: 'Calle, número, ciudad, país, etc.',
                   ),
                 ],
               ),
@@ -99,7 +93,8 @@ class StepBasicInfo extends StatelessWidget {
 
   Widget _buildPrice(AddPropertyProvider provider) {
     return AppNumberField(
-      label: 'Precio',
+      label:
+          'Precio ${provider.offerType == OfferType.rent ? 'de alquiler' : 'de venta'}',
       controller: provider.priceController,
       hint: 'Ej: 120000.50',
       hasError: provider.hasPriceError,
@@ -112,8 +107,6 @@ class StepBasicInfo extends StatelessWidget {
       label: 'Moneda',
       value: provider.currency,
       onChanged: (v) => provider.setCurrency(v!),
-      // hasError: provider.hasCurrencyError,
-      // errorText: 'Seleccione una moneda',
       items: const [
         DropdownMenuItem(value: Currency.cop, child: Text('COP')),
         DropdownMenuItem(value: Currency.usd, child: Text('USD')),
@@ -123,11 +116,9 @@ class StepBasicInfo extends StatelessWidget {
 
   Widget _buildPeriod(AddPropertyProvider provider) {
     return AppDropdown<PeriodType>(
-      label: 'Alquiler por',
+      label: 'Período',
       value: provider.period,
       onChanged: (v) => provider.setPeriod(v!),
-      // hasError: provider.hasPeriodError,
-      // errorText: 'Seleccione un período',
       items: const [
         DropdownMenuItem(value: PeriodType.month, child: Text('Mes')),
         DropdownMenuItem(value: PeriodType.week, child: Text('Semana')),

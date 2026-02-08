@@ -1,0 +1,1 @@
+enum PeriodType { month, week, day, night, hour }

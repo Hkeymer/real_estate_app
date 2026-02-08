@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate_app/core/theme/app_text_styles.dart';
 import 'package:real_estate_app/core/widgets/layout/section_title.dart';
 
 class FormSection extends StatelessWidget {
@@ -12,7 +13,7 @@ class FormSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionTitle(title: title),
+        Text(title, style: AppTextStyles.title),
         const SizedBox(height: 12),
         child,
       ],

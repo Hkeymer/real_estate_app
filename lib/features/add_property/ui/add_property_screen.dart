@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:real_estate_app/features/add_property/provider/add_property_provider.dart';
+import 'package:real_estate_app/features/add_property/steps/step_amenities.dart';
 import 'package:real_estate_app/features/add_property/steps/step_basic_info.dart';
 import 'package:real_estate_app/features/add_property/steps/step_details.dart';
 import 'package:real_estate_app/features/add_property/steps/step_location.dart';
@@ -44,6 +45,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                 StepBasicInfo(),
                 StepPropertyType(),
                 StepDetails(),
+                StepAmenities(),
                 StepLocation(),
               ],
             ),
@@ -54,7 +56,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
             padding: const EdgeInsets.all(16),
             child: PrimaryButton(
               text: provider.currentStep == AddPropertyProvider.totalSteps - 1
-                  ? 'Finish'
+                  ? 'Publicar'
                   : 'Continue',
               onPressed: () {
                 provider.submitStep();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/features/add_property/provider/add_property_provider.dart';
+import 'package:real_estate_app/core/enums/property_type.dart';
 
-IconData propertyTypeIcon(PropertyType type) {
+IconData propertyTypeMapperIcon(PropertyType type) {
   switch (type) {
     case PropertyType.apartment:
       return Icons.apartment;

@@ -39,6 +39,11 @@ class AppDropdown<T> extends StatelessWidget {
           items: items,
           onChanged: onChanged,
           isExpanded: true,
+          style: const TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
           decoration: InputDecoration(
             isDense: true,
             filled: true,
@@ -54,7 +59,6 @@ class AppDropdown<T> extends StatelessWidget {
             focusedErrorBorder: _border(Colors.redAccent),
 
             errorText: hasError ? errorText : null,
-            
           ),
         ),
       ],
